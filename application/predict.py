@@ -2,10 +2,9 @@ from flask import request, jsonify
 import numpy as np
 from PIL import Image
 import io
-from application.garbage_classification_model import load_model, predict_class
+from application.garbage_classification_model importpredict_class
 
 # Load model once at startup
-model = load_model()
 
 def predict():
     if 'file' not in request.files:
@@ -22,6 +21,6 @@ def predict():
     image = np.expand_dims(image, axis=0)
 
     # Make prediction
-    prediction = predict_class(model, image)
+    prediction = predict_class(image)
 
     return jsonify({'class': prediction})
