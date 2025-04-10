@@ -2,7 +2,7 @@ from flask import request, jsonify
 import numpy as np
 from PIL import Image
 import io
-from application.garbage_classification_model importpredict_class
+from application.garbage_classification_model import predict_class
 
 # Load model once at startup
 
