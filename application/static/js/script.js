@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("fileInput");
     const resultText = document.getElementById("result");
     const binImage = document.getElementById("binImage");
+    const snapshot = document.getElementById("snapshot"); // Optional image preview
 
-    // Set canvas size (same as the video)
+    // Set canvas size
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     const canvasWidth = 224;
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Start Camera with rear-facing preference
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "environment" }  // Request back camera
+            video: { facingMode: "environment" } // Back camera
         })
         .then(function (stream) {
             video.srcObject = stream;
@@ -33,14 +34,16 @@ document.addEventListener("DOMContentLoaded", function () {
         // Draw the current video frame on the canvas
         context.drawImage(video, 0, 0, canvasWidth, canvasHeight);
 
-        // Convert the canvas content to a Data URL (image)
+        // Convert the canvas content to a Data URL
         const imageDataUrl = canvas.toDataURL("image/jpeg");
 
-        // Optionally show snapshot (not mandatory)
-        video.srcObject.getTracks().forEach(track => track.stop()); // Stop video stream
-        video.src = imageDataUrl;
+        // Show the captured image in an <img> element (optional)
+        if (snapshot) {
+            snapshot.src = imageDataUrl;
+            snapshot.style.display = "block";
+        }
 
-        // Send the captured image to the server for prediction
+        // Keep the camera stream live — do NOT stop it
         canvas.toBlob(sendImage, "image/jpeg");
     });
 
