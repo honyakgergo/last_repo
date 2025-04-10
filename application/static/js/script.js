@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const uploadBtn = document.getElementById("upload");
     const fileInput = document.getElementById("fileInput");
     const resultText = document.getElementById("result");
-    const binImage = document.getElementById("binImage");  // Add this line for the image
+    const binImage = document.getElementById("binImage");
 
     // Set canvas size (same as the video)
     const canvas = document.createElement("canvas");
@@ -15,15 +15,17 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
 
-    // Start Camera
+    // Start Camera with rear-facing preference
     if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                video.srcObject = stream;
-            })
-            .catch(function (error) {
-                console.log("Camera access denied:", error);
-            });
+        navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }  // Request back camera
+        })
+        .then(function (stream) {
+            video.srcObject = stream;
+        })
+        .catch(function (error) {
+            console.log("Camera access denied or not available:", error);
+        });
     }
 
     // Capture Image
@@ -34,8 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Convert the canvas content to a Data URL (image)
         const imageDataUrl = canvas.toDataURL("image/jpeg");
 
-        // Display the captured image as a snapshot on the video element
-        video.src = imageDataUrl;  // Assign the captured image as a new source for the video element
+        // Optionally show snapshot (not mandatory)
+        video.srcObject.getTracks().forEach(track => track.stop()); // Stop video stream
+        video.src = imageDataUrl;
 
         // Send the captured image to the server for prediction
         canvas.toBlob(sendImage, "image/jpeg");
@@ -63,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
             resultText.textContent = data.class || "Error";
 
             // Display the correct bin image
-            const className = data.class.replace(/ /g, "_");  // Make sure the class name format matches the file name
-            binImage.src = `/static/bins/${className}.png`;  // Change the source to the relevant bin image
+            const className = data.class.replace(/ /g, "_");
+            binImage.src = `/static/bins/${className}.png`;
         })
         .catch(error => {
             console.error("Error:", error);
