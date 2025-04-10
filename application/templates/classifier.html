@@ -1,0 +1,27 @@
+<div id="camera">
+    <!-- Video container with phone-like frame -->
+    <div class="video-container">
+        <video id="video" autoplay></video>
+        <!-- Capture Button on top of the canvas, positioned like it's part of a phone interface -->
+        <button id="capture" class="capture-btn">Capture</button>
+    </div>
+</div>
+
+<!-- File Upload Section -->
+<div class="file-upload-container">
+    <input type="file" id="fileInput" accept="image/*">
+    <button id="upload">Upload</button>
+</div>
+
+<h2>Prediction: <span id="result">None</span></h2>
+
+<!-- Bin Image to be centered -->
+<div class="bin-image-container">
+    <img id="binImage" src="" alt="Bin Image" style="max-width: 200px; max-height: 200px;">
+</div>
+
+<!-- Link to the CSS file -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- Link to the JavaScript file -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>

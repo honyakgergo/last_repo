@@ -1,0 +1,295 @@
+{% extends "index.html" %}
+
+{% block content %}
+<head>
+    <style>
+        /* General body styles */
+        body.home {
+            background-color: #ADD8E6; /* Light blue color */
+        }
+
+        body {
+            background-color: #D3D3D3; /* Light gray background */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header styles */
+        h1, h2 {
+            color: white;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            font-size: 45px;
+        }
+
+        h2 {
+            font-size: 36px;
+        }
+
+        /* Styling for Garbage Classification Section (camera & upload) */
+        #camera {
+            margin: 20px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Phone-like design for the video container */
+        .video-container {
+            width: 320px;  /* Size of the phone screen */
+            height: 570px;
+            border: 8px solid #000;  /* Thinner black border for the "phone" frame */
+            border-radius: 36px;  /* Rounded corners */
+            overflow: hidden;
+            background-color: black;
+            margin: 0 auto;  /* Center the video container */
+            position: relative; /* To position the button inside the container */
+        }
+
+        video {
+            width: 100%;   /* Full width of the container */
+            height: 100%;  /* Full height of the container */
+            object-fit: cover; /* Ensure the video covers the entire container */
+        }
+
+        /* Capture button on the video */
+        .capture-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);  /* Center the button horizontally */
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 10; /* Make sure the button stays above the video */
+        }
+
+        .capture-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);  /* Darker background on hover */
+        }
+
+        /* File Upload Section */
+        .file-upload-container {
+            margin-top: 20px; /* Space between the canvas and file upload */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center both buttons */
+        }
+
+        input[type="file"] {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc; /* Light border */
+            font-size: 16px;
+            width: 250px; /* Set a fixed width for the file input */
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: #4CAF50; /* Green color for main buttons */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        #upload {
+            background-color: #008CBA; /* Blue color for upload button */
+        }
+
+        #upload:hover {
+            background-color: #0077A5; /* Darker blue on hover */
+        }
+
+        /* Result text styling */
+        #result {
+            font-weight: bold;
+            font-size: 24px;
+            color: #333;  /* Dark gray color for the result */
+            margin-top: 15px;
+        }
+
+        /* Card styles for form and other sections */
+        .card {
+            background-color: #D3D3D3;
+            color: #000000;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .card-subtitle {
+            color: #000000;
+        }
+
+        .card-body p {
+            text-align: right;
+        }
+
+        .card-link {
+            text-decoration: none;
+        }
+
+        .card-link > .card:hover {
+            background-color: #A9A9A9; /* Darker gray on hover */
+        }
+
+        /* Feedback section styles */
+        .feedback-heading {
+            color: white;
+        }
+
+        .contact-email {
+            color: white;
+        }
+
+        /* Form styling */
+        form {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .account-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            color: #2c3e50;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .history-item {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 0.5rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .history-item:hover {
+            transform: scale(1.03);
+        }
+
+        .history-img {
+            width: 100%;
+            border-radius: 8px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .class-label {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #34495e;
+        }
+
+        .user-stats p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        /* Styling for Email and Password Fields */
+        .user-details {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .user-details label {
+            font-weight: 600;
+            color: #333;  /* Dark color for the labels */
+        }
+
+        .user-details p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #333;  /* Darker text color for the email and password */
+        }
+    </style>
+</head>
+
+<div class="account-container">
+  <h2>Welcome, {{ current_user.username }} 👋</h2>
+
+  <!-- User Details (Email and Password) -->
+  <div class="user-details card">
+    <h3>Your Details</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <p>{{ current_user.email }}</p>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <p>**********</p> <!-- Just display a masked version of the password -->
+    </div>
+  </div>
+
+  <!-- Upload History -->
+  <div class="upload-history card">
+    <h3>🗂️ Your Classification History</h3>
+    {% if classification_history %}
+      <div class="history-grid">
+        {% for item in classification_history %}
+        <div class="history-item">
+          <img src="{{ url_for('static', filename=item.image_path) }}" alt="Classified Image" class="history-img">
+          <p class="class-label">{{ item.predicted_class }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No classifications yet. Start cleaning up the planet! 🌍</p>
+    {% endif %}
+  </div>
+
+  <!-- Stats Widget -->
+  <div class="user-stats card">
+    <h3>📊 Your Stats</h3>
+    <p><strong>Total Classified:</strong> {{ classification_history|length }}</p>
+    <p><strong>Top Category:</strong> {{ most_common_class }}</p>
+  </div>
+</div>
+
+{% endblock content %}

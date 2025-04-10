@@ -1,0 +1,135 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <div class="contact-container">
+    <div class="card contact-card">
+      <h2 class="text-center my-4">Contact Us</h2>
+
+      <p class="text-center">
+        If you have any questions or feedback, feel free to reach out to us!
+      </p>
+
+      <div class="contact-info">
+        <h4 class="my-3">📧 Email</h4>
+        <p><a href="mailto:wastewarrior@gmail.com" class="contact-email">wastewarrior@gmail.com</a></p>
+
+        <h4 class="my-3">📍 Social Media</h4>
+        <p>Follow us on social media for more updates:</p>
+        <div class="social-links">
+          <!-- Improved social media buttons with icons -->
+          <a href="#" class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </a>
+          <a href="#" class="social-btn twitter-btn">
+            <i class="fab fa-twitter"></i> Twitter
+          </a>
+          <a href="#" class="social-btn instagram-btn">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inline styling for consistency with the rest of your design -->
+  <style>
+    /* Applying the same background and other styles to the Contact Page */
+    body {
+      background-color: #D3D3D3; /* Light gray background */
+      font-family: Arial, sans-serif;
+    }
+
+    .contact-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+    }
+
+    .contact-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+    }
+
+    .contact-card h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+    }
+
+    .contact-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .contact-email {
+      color: #008CBA;
+      text-decoration: none;
+    }
+
+    .contact-email:hover {
+      text-decoration: underline;
+    }
+
+    /* Social Media Button Styles */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 1rem;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #fff;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-5px); /* Slight hover effect */
+    }
+
+    .facebook-btn {
+      background-color: #3b5998; /* Facebook Blue */
+    }
+
+    .facebook-btn:hover {
+      background-color: #2d4373; /* Darker Facebook Blue */
+    }
+
+    .twitter-btn {
+      background-color: #1da1f2; /* Twitter Blue */
+    }
+
+    .twitter-btn:hover {
+      background-color: #0d95e8; /* Darker Twitter Blue */
+    }
+
+    .instagram-btn {
+      background-color: #e4405f; /* Instagram Red */
+    }
+
+    .instagram-btn:hover {
+      background-color: #b7314f; /* Darker Instagram Red */
+    }
+
+    /* Adding Icons */
+    .social-btn i {
+      margin-right: 8px;
+      font-size: 1.3rem;
+    }
+  </style>
+
+  <!-- FontAwesome for social media icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+{% endblock %}

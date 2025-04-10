@@ -1,0 +1,237 @@
+/* General body styles */
+body.home {
+  background-color: #ADD8E6; /* Light blue color */
+}
+
+body {
+  background-color: #D3D3D3; /* Light gray background */
+  font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+h1, h2 {
+  color: white;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+/* Styling for Garbage Classification Section (camera & upload) */
+#camera {
+  margin: 20px auto;
+  text-align: center;
+  position: relative;
+}
+
+/* Phone-like design for the video container */
+.video-container {
+  width: 320px;  /* Size of the phone screen */
+  height: 570px;
+  border: 8px solid #000;  /* Thinner black border for the "phone" frame */
+  border-radius: 36px;  /* Rounded corners */
+  overflow: hidden;
+  background-color: black;
+  margin: 0 auto;  /* Center the video container */
+  position: relative; /* To position the button inside the container */
+}
+
+video {
+  width: 100%;   /* Full width of the container */
+  height: 100%;  /* Full height of the container */
+  object-fit: cover; /* Ensure the video covers the entire container */
+}
+
+/* Capture button on the video */
+.capture-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);  /* Center the button horizontally */
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 10; /* Make sure the button stays above the video */
+}
+
+.capture-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);  /* Darker background on hover */
+}
+
+/* File Upload Section */
+.file-upload-container {
+  margin-top: 20px; /* Space between the canvas and file upload */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center both buttons */
+}
+
+input[type="file"] {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc; /* Light border */
+  font-size: 16px;
+  width: 250px; /* Set a fixed width for the file input */
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: #4CAF50; /* Green color for main buttons */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+#upload {
+  background-color: #008CBA; /* Blue color for upload button */
+}
+
+#upload:hover {
+  background-color: #0077A5; /* Darker blue on hover */
+}
+
+/* Result text styling */
+#result {
+  font-weight: bold;
+  font-size: 24px;
+  color: #333;  /* Dark gray color for the result */
+  margin-top: 15px;
+}
+
+/* Card styles for form and other sections */
+.card {
+  background-color: #D3D3D3;
+  color: #000000;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.card-subtitle {
+  color: #000000;
+}
+
+.card-body p {
+  text-align: right;
+}
+
+.card-link {
+  text-decoration: none;
+}
+
+.card-link > .card:hover {
+  background-color: #A9A9A9; /* Darker gray on hover */
+}
+
+/* Feedback section styles */
+.feedback-heading {
+  color: white;
+}
+
+.contact-email {
+  color: white;
+}
+
+/* Form styling */
+form {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  color: white;
+}
+
+.account-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #2c3e50;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.history-item {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.history-item:hover {
+  transform: scale(1.03);
+}
+
+.history-img {
+  width: 100%;
+  border-radius: 8px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.class-label {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #34495e;
+}
+
+.user-stats p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.bin-image-container {
+  text-align: center; /* Centers the image horizontally */
+  margin-top: 20px; /* Adds some space above the image if needed, adjust as necessary */
+}
+
+#binImage {
+  max-width: 200px; /* Adjust the size as needed */
+  max-height: 200px; /* Adjust the size as needed */
+  display: block; /* Ensures it's treated as a block element */
+  margin-left: auto; /* Auto left margin to center */
+  margin-right: auto; /* Auto right margin to center */
+}
